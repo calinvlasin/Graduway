@@ -1,0 +1,113 @@
+<div class="mainContainer">
+  <div class="container">
+    <div class="buttonsContainer">
+      <p>
+        <button class="w3-button w3-green" (click)="onAddEmployeeClick()">
+          Add Employee
+        </button>
+      </p>
+    </div>
+    <div class="tableContainer">
+      <table id="table">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Title</th>
+          <th>Department</th>
+          <th>Address</th>
+          <th>Edit</th>
+          <th class="w3-red">Delete</th>
+        </tr>
+        <tr
+          *ngFor="let employee of employees"
+          (click)="onEmployeeClicked(employee.id)"
+        >
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.title }}</td>
+          <td>{{ employee.department }}</td>
+          <td>{{ employee.address }}</td>
+          <td>
+            <button
+              class="w3-button w3-green"
+              (click)="onEditEmployeeClicked(employee.id)"
+            >
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              class="w3-button w3-red"
+              (click)="onDeleteEmployeeClicked(employee.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="addEmployeeContainer">
+      <employee
+        *ngIf="showEmployee"
+        (employeeSaved)="loadEmployees()"
+        [employeeId]="employeeId"
+        [isUpdatedEmployee]="isUpdatedEmployee"
+      ></employee>
+    </div>
+  </div>
+
+  <div class="tasksContainer">
+    <div class="buttonsContainer">
+      <p>
+        <button class="w3-button w3-green" (click)="onAddTaskClicked()">
+          Add Task
+        </button>
+      </p>
+    </div>
+    <div class="tableContainer">
+      <table id="table" class="tasksTable">
+        <tr
+          *ngFor="let task of tasks"
+          (click)="onTaskClicked(task.id)"
+          class="employeesTableRow"
+        >
+          <td>{{ task.title }}</td>
+          <div *ngIf="showTaskDetails === task.id">
+            <td>{{ task.description }}</td>
+            <td>{{ task.estimate }}</td>
+            <td>{{ task.stateLabel }}</td>
+            <td>
+              {{ task.priorityLevelLabel }}
+            </td>
+            <td>
+              <button
+                class="w3-button w3-green"
+                (click)="onEditTaskClicked(task.id)"
+              >
+                Edit
+              </button>
+            </td>
+            <td>
+              <button
+                class="w3-button w3-red"
+                (click)="onDeleteTaskClicked(task.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </div>
+        </tr>
+      </table>
+    </div>
+    <div class="addTaskContainer">
+      <task
+        *ngIf="showTask"
+        (taskSaved)="loadTasks(employeeId)"
+        [employeeId]="employeeId"
+        [taskId]="taskId"
+        [isUpdateTask]="isUpdateTask"
+      >
+      </task>
+    </div>
+  </div>
+</div>

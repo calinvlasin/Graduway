@@ -1,0 +1,27 @@
+<div class="w3-card-4 formContainer">
+  <div class="w3-container w3-green">
+    <h2>{{formHeaderLabel}}</h2>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="saveTask()">
+    <label>Title</label>
+    <input id="title" formControlName="title" class="w3-input" type="text"/>
+
+    <label>Description</label>
+    <input id="description" formControlName="description" class="w3-input" type="text" />
+
+    <label>Estimate</label>
+    <input id="estimate" formControlName="estimate" class="w3-input" type="number" />
+
+    <label>State</label>
+    <select id="stateId" formControlName="stateId" class="w3-input">
+      <option *ngFor="let state of states" [ngValue]="state.id">{{state.stateDescr}}</option>
+    </select>
+
+    <label>Priority</label>
+    <select  id="priorityLevelId" formControlName="priorityLevelId" class="w3-input">
+      <option *ngFor="let priorityLevel of priorityLevels" [ngValue]="priorityLevel.id">{{priorityLevel.priority}}</option>
+    </select>
+
+    <button class="w3-button w3-green saveButton">Save</button>
+  </form>
+</div>
